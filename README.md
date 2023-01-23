@@ -18,7 +18,7 @@ You can create new records.
 
 ![My record is added](pictures/resultOfAdd.png)
 
-You can also delete records. 
+You can also delete records.   
 ![Delete button](pictures/delete.png)
 
 Enjoy writing your food diary with the app!
