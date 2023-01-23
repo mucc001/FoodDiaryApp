@@ -18,22 +18,49 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.get('/records', (req, res) => {
-    res.json(records);
+  try {
+    res.status(200).json(records);
+  }  catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 });
 
 app.post('/records', (req, res) => {
-  const newRecord = req.body;
-  console.log(newRecord);
-  records.push(newRecord);
-  res.status(201).json(records);
+  try {
+    const newRecord = req.body;
+    console.log(newRecord);
+    records.push(newRecord);
+    res.status(201).json(records);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+app.put('/records/:id', (req, res) => {
+  try {
+    const id = req.params.id;
+    const updatedRecord = req.body;
+    records[id] = updatedRecord;
+    res.status(200).json(records[id]);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 });
 
 app.delete('/records/:id', (req, res) => {
-  const id = Number(req.params.id);
-  records = records.filter((record, index) => {
+  try {
+    const id = Number(req.params.id);
+    records = records.filter((record, index) => {
     return index !== id;
   });
   res.status(200).json(records);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 });
 
 app.listen(PORT, () => {
