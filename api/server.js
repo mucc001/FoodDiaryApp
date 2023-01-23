@@ -38,18 +38,6 @@ app.post('/records', (req, res) => {
   }
 });
 
-app.put('/records/:id', (req, res) => {
-  try {
-    const id = req.params.id;
-    const updatedRecord = req.body;
-    records[id] = updatedRecord;
-    res.status(200).json(records[id]);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ message: 'Internal server error' });
-  }
-});
-
 app.delete('/records/:id', (req, res) => {
   try {
     const id = Number(req.params.id);
